@@ -1,2 +1,2 @@
-# building-realtime-angular-controls
-The source code for the starting point of my Pluralsight course:  Building Realtime Angular Controls.
+# building-realtime-angular-controls with Signal R
+Made this demo following Real Time Angular Controls by Mark Zamoyta in Pluralsight
