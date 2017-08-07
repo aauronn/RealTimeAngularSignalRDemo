@@ -1,3 +1,9 @@
-﻿"use strict";
+﻿(function () {
+    "use strict";
 
-angular.module("psDashboard", ["gridster", "ui.bootstrap"]);
+    angular
+        .module("psDashboard", [
+            "gridster",
+            "ui.bootstrap"
+        ]);
+})();

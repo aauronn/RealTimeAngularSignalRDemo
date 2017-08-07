@@ -26,7 +26,8 @@
     <script src="http://localhost:50447/signalr/hubs"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script>
-        google.load('visualization', '1.0', { 'packages': ['gauge'] });
+        // Bootstraping angular -> this way we wait until the library finish 
+        google.load('visualization', '1.0', { 'packages': ['corechart', 'line', 'gauge'] });
         google.setOnLoadCallback(function () {
             angular.bootstrap(document, ['app']);
         });
@@ -50,23 +51,30 @@
     <script src="ext-modules/psFramework/psUserProfile/psUserProfileSmallDirective.js"></script>
     <script src="ext-modules/psFramework/psUserProfile/psUserProfileDirective.js"></script>
 
-    <script src="ext-modules/psCharts/psChartsModule.js"></script>
-    <script src="ext-modules/psCharts/psGaugeDirective.js"></script>
+    <!--<script src="ext-modules/psCharts/psChartsModule.js"></script>
+    <script src="ext-modules/psCharts/psGaugeDirective.js"></script>-->
 
     <script src="ext-modules/psWebMetricsService/psWebMetricsService.js"></script>
+
+    <script src="ext-modules/psCharts/psCharts.module.js"></script>
+    <script src="ext-modules/psCharts/directives/psGauge.directive.js"></script>
+    <script src="ext-modules/psCharts/directives/psLineChart.directive.js"></script>
 
     <script src="app/appModule.js"></script>
     <script src="app/appConfig.js"></script>
     <script src="app/appRouteConfig.js"></script>
 
-    <script src="app/directives/rtaDashboardDirective.js"></script>
+
+    <!-- dashboards-->
+    <script src="app/directives/rtaDashboard.directive.js"></script>
 
 
     <!-- widget JavaScript files -->
-    <script src="app/widgets/rtaGauge/rtaGaugeWidgetDirective.js"></script>
+    <script src="app/widgets/rtaGaugeWidget.directive.js"></script>
+    <script src="app/widgets/rtaLineChartWidget.directive.js"></script>
 
     <!-- setting dialogs -->
-    <script src="app/dialogs/rtaSelectMetricController.js"></script>
+    <script src="app/dialogs/rtaSelectMetric.controller.js"></script>
 
 </head>
 <body class="container-fluid">

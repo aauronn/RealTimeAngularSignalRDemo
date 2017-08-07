@@ -1,7 +1,15 @@
-﻿"use strict";
+﻿(function () {
+    "use strict";
 
-angular.module('psFramework').directive('psUserProfile', function () {
-    return {
-        templateUrl: 'ext-modules/psFramework/psUserProfile/psUserProfileTemplate.html'
-    };
-});
+    angular
+        .module('psFramework')
+        .directive('psUserProfile', psUserProfile);
+
+    psUserProfile.$inject = [];
+
+    function psUserProfile() {
+        return {
+            templateUrl: 'ext-modules/psFramework/psUserProfile/psUserProfileTemplate.html'
+        };
+    }
+})();

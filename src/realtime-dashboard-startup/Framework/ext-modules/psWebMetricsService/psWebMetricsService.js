@@ -1,16 +1,24 @@
-﻿'use strict';
+﻿(function () {
+    'use strict';
 
-angular.module('psWebMetricsService', []).factory('psWebMetricsService', [
-    '$rootScope',
-    function ($rootScope) {
+    angular
+        .module('psWebMetricsService', [
+            //Dependencies
+
+        ])
+        .factory('psWebMetricsService', psWebMetricsService);
+
+    psWebMetricsService.$inject = ['$rootScope'];
+
+    function psWebMetricsService($rootScope) {
 
         // Declare a proxy to reference the hub.
         $.connection.hub.url = 'http://localhost:50447/signalr';
-        var hub = $.connection.myHub1;
+        var hub = $.connection.metricHub;
         // Create a function that the hub can call to broadcast messages.
         hub.client.broadcastMessage = function (time, bandwidthPct, cpuPct,
-                                                    salesAmt, alphaSalesAmt, betaSalesAmt) {
-            
+            salesAmt, alphaSalesAmt, betaSalesAmt) {
+
             $rootScope.$broadcast('psWebMetricsService-received-data-event',
                 {
                     'time': time,
@@ -21,13 +29,13 @@ angular.module('psWebMetricsService', []).factory('psWebMetricsService', [
                     'betaSalesAmt': betaSalesAmt,
                 });
         };
-        
+
         $.connection.hub.start()
             .done()
             .fail(function (data) {
                 alert(data);
             }
-        );
+            );
 
         $.connection.hub.disconnected(function () {
             console.log('disconnected signalr');
@@ -36,7 +44,11 @@ angular.module('psWebMetricsService', []).factory('psWebMetricsService', [
                 });
         });
 
-        var getTitleForMetric = function (metric) {
+        //-----------------------------------
+        // Functions
+        //-----------------------------------
+
+        function getTitleForMetric(metric) {
             switch (metric) {
                 case 'time':
                     return 'Time';
@@ -52,12 +64,16 @@ angular.module('psWebMetricsService', []).factory('psWebMetricsService', [
                     return 'Beta Sales Amount';
             }
             return undefined;
-        };
+        }
+
+        function getMetricsArray() {
+            return ['time', 'bandwidthPct', 'cpuPct', 'salesAmt', 'alphaSalesAmt', 'betaSalesAmt'];
+        }
 
         return {
-            getTitleForMetric: getTitleForMetric
+            getTitleForMetric: getTitleForMetric,
+            getMetricsArray: getMetricsArray
         };
-       
-    }
-]);
 
+    }
+})();

@@ -1,8 +1,13 @@
-﻿"use strict";
+﻿(function () {
+    "use strict";
 
-angular.module('psDashboard').directive('psWidgetBody',
-    ['$compile', '$modal',
-    function ($compile, $modal) {
+    angular
+        .module('psDashboard')
+        .directive('psWidgetBody', psWidgetBody);
+
+    psWidgetBody.$inject = ['$compile', '$uibModal']
+
+    function psWidgetBody($compile, $uibModal) {
         return {
             templateUrl: 'ext-modules/psDashboard/psWidgetBodyTemplate.html',
             link: function (scope, element, attrs) {
@@ -20,17 +25,28 @@ angular.module('psDashboard').directive('psWidgetBody',
                         controller: scope.item.widgetSettings.controller,
                         scope: scope
                     };
-                    $modal.open(options);
+
+                    var modalInstance = $uibModal.open(options);
+
+                    modalInstance.result
+                        .then(function () {
+                            //scope.iconClicked2();
+                        }, function () {
+                            
+                        });
                 };
 
                 scope.iconClicked = function () {
+                    
                     // empty body.
                     // this function is used by ng-click in the template
                     // so that icon clicks aren't intercepted by widgets
                 };
 
-                
+                scope.iconClicked2 = function () {
+                };
+
             }
         };
     }
-]);
+})();
